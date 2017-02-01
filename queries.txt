@@ -1,0 +1,14 @@
+create database scheduler;
+
+drop table if exists meeting_attendees;
+drop table if exists user;
+drop table if exists meeting;
+drop table if exists meeting_attendees;
+
+create table user(userid bigint(20) AUTO_INCREMENT, fullname varchar(100),email varchar(100),username varchar(30),password varchar(30), PRIMARY KEY(userid));
+insert into user(fullname,email,username,password) values('Andy Parker','andy@gmail.com','andy','1234');
+
+create table meeting( id bigint(20) primary key, duration varchar(255), location varchar(255), meeting_date varchar(255), priority varchar(255), time1 varchar(255), time2 varchar(255), time3 varchar(255), time4 varchar(255), time5 varchar(255), title varchar(255));
+
+create table meeting_attendees(meeting_id bigint(20),attendees_userid bigint(20),foreign key(attendees_userid) references user(userid), foreign key(meeting_id) references meeting(id));
+alter table meeting_attendees add unique(meeting_id, attendees_userid);
